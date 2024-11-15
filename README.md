@@ -22,4 +22,4 @@ Tailored Odoo solution for TechBuild, a fictitious company specializing in custo
 1. `mkdir odoo`
 2. `cd odoo`
 3. `docker run -d --name odoo-db -e POSTGRES_DB=postgres -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -v odoo-db-data:/var/lib/postgresql/data postgres:15`
-4. `docker run -v odoo-data:/var/lib/odoo -v ./addons:/mnt/extra-addons -d -p 8069:8069 --link odoo-db:db -t odoo:17`
+4. `docker run -v odoo-data:/var/lib/odoo -v ./addons:/mnt/extra-addons -d -p 8069:8069 --link odoo-db:db -t --name odoo odoo:17`
