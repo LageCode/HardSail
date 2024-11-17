@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+    restart: always
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+
+  web:
+    image: odoo:17
+    depends_on:
+      - db
+    ports:
+      - "8069:8069" 
+    tty: true
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - ./addons:/mnt/extra-addons
+    restart: always
