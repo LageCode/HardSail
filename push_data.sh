@@ -9,4 +9,4 @@ docker run --rm -v odoo-db-data:/data -v $(pwd):/backup busybox tar czf /backup/
 # Add backups to Git
 git add odoo-web-data.tar.gz odoo-db-data.tar.gz
 git commit -m "Backup Odoo and PostgreSQL data"
-git push origin master
+git push origin $(git branch --show-current)
