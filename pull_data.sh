@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Pull the latest changes from Git
-git pull origin master
+git pull origin $(git branch --show-current)
 
 # Restore Odoo data
 docker run --rm -v odoo-web-data:/data -v $(pwd):/backup busybox tar xzf /backup/odoo-web-data.tar.gz -C /data
