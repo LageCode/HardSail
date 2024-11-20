@@ -1,34 +1,52 @@
 version: '3.1'
+
 services:
-  web:
-    image: odoo:17.0
-    depends_on:
-      - db
-    ports:
-      - "8069:8069"
-    volumes:
-      - odoo-web-data:/var/lib/odoo
-      - ./config:/etc/odoo
-      - ./addons:/mnt/extra-addons
-    environment:
-      - PASSWORD_FILE=/run/secrets/postgresql_password
-    secrets:
-      - postgresql_password
   db:
-    image: postgres:15
+    image: postgres:16
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD_FILE=/run/secrets/postgresql_password
       - POSTGRES_USER=odoo
-      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=odbpwd
     volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
-    secrets:
-      - postgresql_password
-volumes:
-  odoo-web-data:
-  odoo-db-data:
+      - odoo-db-data:/var/lib/postgresql/data
+    ports:
+      - "5444:5432"
+    restart: unless-stopped
+    networks:
+      - odoo-network
 
-secrets:
-  postgresql_password:
-    file: odoo_pg_pass
+  web:
+    image: odoo:17
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8070:8069"
+    volumes:
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+      - odoo-web-data:/var/lib/odoo
+    environment:
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:en
+      - LC_ALL=en_US.UTF-8
+      - HOST=db
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odbpwd
+      - POSTGRES_DB=postgres
+    restart: unless-stopped
+    networks:
+      - odoo-network
+
+volumes:
+  odoo-db-data:
+  odoo-web-data:
+
+networks:
+  odoo-network:
+    driver: bridge
