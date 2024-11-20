@@ -19,7 +19,12 @@ Tailored Odoo solution for TechBuild, a fictitious company specializing in custo
 
 ## Getting Started
 
-1. `mkdir odoo`
-2. `cd odoo`
-3. `docker run -d --name odoo-db -e POSTGRES_DB=postgres -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -v odoo-db-data:/var/lib/postgresql/data postgres:15`
-4. `docker run -v odoo-data:/var/lib/odoo -v ./addons:/mnt/extra-addons -d -p 8069:8069 --link odoo-db:db -t --name odoo odoo:17`
+- Launch the containers: `docker compose up -d`
+- Stop containers: `docker compose stop`
+- Restart containers: `docker compose start`
+- Remove containers: `docker compose down`
+
+## Data transfer
+
+- Export data: `./export-data.sh` -> This script will export volume data from odoo db and web containers into tar files in the *backup/* directory.
+- Import data: `./import-data.sh` -> This script will load the volume data from *backup/odoo-db-data.tar* and *backup/odoo-web-data.tar* to corresping volumes.
