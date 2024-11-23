@@ -1,4 +1,5 @@
 #!/bin/bash 
+# docker-status.sh
 
 # Path to your docker-compose file 
 COMPOSE_FILE_PATH="./docker-compose.yml" 
