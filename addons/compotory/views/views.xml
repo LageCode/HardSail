@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Form View -->
     <record id="product_template_form_view_inherit" model="ir.ui.view">
         <field name="name">product.template.form.inherit</field>
         <field name="model">product.template</field>
@@ -17,19 +18,55 @@
                     <group>
                         <field name="component_type"/>
                     </group>
+                    <!-- CPU Specifications -->
+                    <group string="CPU Specifications" invisible="component_type != 'cpu'">
+                        <group>
+                            <field name="cpu_brand"/>
+                            <field name="cpu_series"/>
+                            <field name="cpu_socket"/>
+                            <field name="cpu_cores"/>
+                            <field name="cpu_threads"/>
+                        </group>
+                        <group>
+                            <field name="cpu_base_clock"/>
+                            <field name="cpu_boost_clock"/>
+                            <field name="cpu_cache"/>
+                            <field name="cpu_tdp"/>
+                            <field name="cpu_integrated_graphics"/>
+                        </group>
+                    </group>
                 </page>
             </notebook>
         </field>
     </record>
 
+    <!-- Tree View -->
+    <record id="view_hardware_product_tree" model="ir.ui.view">
+        <field name="name">product.template.hardware.tree</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="component_type"/>
+                <field name="default_code"/>
+                <field name="list_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
     <record id="action_hardware_products" model="ir.actions.act_window">
         <field name="name">Hardware Products</field>
         <field name="res_model">product.template</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('is_hardware', '=', True)]</field>
-        <field name="context">{}</field>
+        <field name="context">{
+            'default_is_hardware': True,
+            'default_detailed_type': 'product'
+        }</field>
     </record>
 
+    <!-- Menu -->
     <menuitem
         id="menu_hardware_root"
         name="Hardware"
