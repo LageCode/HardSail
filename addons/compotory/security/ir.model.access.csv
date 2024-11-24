@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_compotory_compotory,compotory.compotory,model_compotory_compotory,base.group_user,1,1,1,1

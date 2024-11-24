@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']" position="inside">
+                <div>
+                    <field name="is_hardware"/>
+                    <label for="is_hardware"/>
+                </div>
+            </xpath>
+            
+            <notebook position="inside">
+                <page string="Hardware" invisible="not is_hardware">
+                    <group>
+                        <field name="component_type"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="action_hardware_products" model="ir.actions.act_window">
+        <field name="name">Hardware Products</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_hardware', '=', True)]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+        id="menu_hardware_root"
+        name="Hardware"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_hardware_components"
+        name="Components"
+        parent="menu_hardware_root"
+        action="action_hardware_products"
+        sequence="1"/>
+</odoo>

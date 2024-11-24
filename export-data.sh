@@ -16,7 +16,3 @@ docker run --rm -v hardsail_odoo-db-data:/data -v ./backup:/backup ubuntu tar cv
 docker run --rm -v hardsail_odoo-web-data:/data -v ./backup:/backup ubuntu tar cvf /backup/odoo-web-data.tar -o /data
 
 sudo chown $(whoami):$(whoami) ./backup ./backup/*
-
-gzip ./backup/*
-
-git add ./backup
