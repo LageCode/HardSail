@@ -1,81 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Form View -->
     <record id="product_template_form_view_inherit" model="ir.ui.view">
-        <field name="name">product.template.form.inherit</field>
+        <field name="name">product.template.hardware.form</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@name='options']" position="inside">
+            <div name="options" position="inside">
                 <div>
                     <field name="is_hardware"/>
                     <label for="is_hardware"/>
                 </div>
-            </xpath>
+            </div>
             
             <notebook position="inside">
                 <page string="Hardware" invisible="not is_hardware">
                     <group>
                         <field name="component_type"/>
+                        <field name="manufacturer"/>
                     </group>
+
                     <!-- CPU Specifications -->
                     <group string="CPU Specifications" invisible="component_type != 'cpu'">
                         <group>
-                            <field name="cpu_brand"/>
-                            <field name="cpu_series"/>
                             <field name="cpu_socket"/>
                             <field name="cpu_cores"/>
                             <field name="cpu_threads"/>
+                            <field name="cpu_base_clock"/>
                         </group>
                         <group>
-                            <field name="cpu_base_clock"/>
                             <field name="cpu_boost_clock"/>
                             <field name="cpu_cache"/>
                             <field name="cpu_tdp"/>
-                            <field name="cpu_integrated_graphics"/>
+                        </group>
+                    </group>
+
+                    <!-- GPU Specifications -->
+                    <group string="GPU Specifications" invisible="component_type != 'gpu'">
+                        <group>
+                            <field name="gpu_memory"/>
+                            <field name="gpu_type"/>
+                        </group>
+                        <group>
+                            <field name="gpu_bus"/>
+                            <field name="gpu_tdp"/>
+                        </group>
+                    </group>
+
+                    <!-- RAM Specifications -->
+                    <group string="RAM Specifications" invisible="component_type != 'ram'">
+                        <group>
+                            <field name="ram_capacity"/>
+                            <field name="ram_type"/>
+                        </group>
+                        <group>
+                            <field name="ram_speed"/>
+                            <field name="ram_latency"/>
+                        </group>
+                    </group>
+
+                    <!-- Motherboard Specifications -->
+                    <group string="Motherboard Specifications" invisible="component_type != 'motherboard'">
+                        <group>
+                            <field name="mb_socket"/>
+                            <field name="mb_chipset"/>
+                            <field name="mb_form_factor"/>
+                        </group>
+                        <group>
+                            <field name="mb_ram_slots"/>
+                            <field name="mb_ram_type"/>
                         </group>
                     </group>
                 </page>
             </notebook>
         </field>
     </record>
-
-    <!-- Tree View -->
-    <record id="view_hardware_product_tree" model="ir.ui.view">
-        <field name="name">product.template.hardware.tree</field>
-        <field name="model">product.template</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="component_type"/>
-                <field name="default_code"/>
-                <field name="list_price"/>
-            </tree>
-        </field>
-    </record>
-
-    <!-- Action -->
-    <record id="action_hardware_products" model="ir.actions.act_window">
-        <field name="name">Hardware Products</field>
-        <field name="res_model">product.template</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[('is_hardware', '=', True)]</field>
-        <field name="context">{
-            'default_is_hardware': True,
-            'default_detailed_type': 'product'
-        }</field>
-    </record>
-
-    <!-- Menu -->
-    <menuitem
-        id="menu_hardware_root"
-        name="Hardware"
-        sequence="10"/>
-
-    <menuitem
-        id="menu_hardware_components"
-        name="Components"
-        parent="menu_hardware_root"
-        action="action_hardware_products"
-        sequence="1"/>
 </odoo>

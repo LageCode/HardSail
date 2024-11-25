@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hardware_product_template,hardware.product.template,product.model_product_template,base.group_user,1,1,1,1
+access_product_template_hardware,product.template.hardware,product.model_product_template,base.group_user,1,1,1,1
