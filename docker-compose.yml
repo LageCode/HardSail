@@ -13,7 +13,6 @@ services:
       - HOST=db
       - USER=odoo
       - PASSWORD=myodoo
-      - DB_NAME=HardSail
   db:
     image: postgres:16
     environment:

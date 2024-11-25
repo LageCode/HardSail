@@ -1,18 +1,28 @@
-#!/bin/bash 
+#!/bin/bash
 # export-data.sh
 
-# Run the check_docker_compose.sh script 
-./docker-status.sh 
+# Create backup directory if it doesn't exist
+mkdir -p ./backup
 
-# Capture the exit status 
-STATUS=$?
+# Make sure DB is running
+echo "Ensuring database is running..."
+docker compose up -d db
+sleep 5  # Give DB time to start
 
-# Check the status and perform actions accordingly 
-if [ $STATUS -eq 0 ]; then 
-    docker-compose stop
-fi
+# Export database using pg_dump with network connection
+echo "Exporting HardSail database..."
+docker compose exec db pg_dump -U odoo HardSail > ./backup/hardsail_db.sql
 
-docker run --rm -v hardsail_odoo-db-data:/data -v ./backup:/backup ubuntu tar cvf /backup/odoo-db-data.tar -o /data
-docker run --rm -v hardsail_odoo-web-data:/data -v ./backup:/backup ubuntu tar cvf /backup/odoo-web-data.tar -o /data
+# Export filestore
+echo "Exporting Odoo filestore..."
+docker run --rm \
+    -v hardsail_odoo-web-data:/data \
+    -v ./backup:/backup \
+    ubuntu \
+    tar -czf /backup/odoo_filestore.tar.gz -C /data .
 
+# Fix permissions
+echo "Fixing backup file permissions..."
 sudo chown $(whoami):$(whoami) ./backup ./backup/*
+
+echo "Export completed!"
