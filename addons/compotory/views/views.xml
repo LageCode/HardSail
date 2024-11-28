@@ -15,7 +15,7 @@
                 <page string="Hardware" invisible="not is_hardware">
                     <group>
                         <field name="component_type"/>
-                        <field name="manufacturer"/>
+                        <field name="manufacturer" options="{'no_create_edit': True}"/>
                     </group>
 
                     <!-- CPU Specifications -->
@@ -67,6 +67,31 @@
                         <group>
                             <field name="mb_ram_slots"/>
                             <field name="mb_ram_type"/>
+                        </group>
+                    </group>
+
+                    <!-- Case Specifications -->
+                    <group string="Case Specifications" invisible="component_type != 'case'">
+                        <group>
+                            <field name="case_form_factor"/>
+                            <field name="case_max_gpu_length"/>
+                        </group>
+                        <group>
+                            <field name="case_max_psu_length"/>
+                            <field name="case_included_fans"/>
+                            <field name="case_max_fans"/>
+                        </group>
+                    </group>
+
+                    <!-- Power Supply Specifications -->
+                    <group string="Power Supply Specifications" invisible="component_type != 'psu'">
+                        <group>
+                            <field name="psu_wattage"/>
+                            <field name="psu_efficiency"/>
+                        </group>
+                        <group>
+                            <field name="psu_modular"/>
+                            <field name="psu_form_factor"/>
                         </group>
                     </group>
                 </page>
