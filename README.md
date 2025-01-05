@@ -20,11 +20,19 @@ Tailored Odoo solution for TechBuild, a fictitious company specializing in custo
 ## Getting Started
 
 - Launch the containers: `docker compose up -d`
+- Connect to *localhost:8070* and create a db, *mydb*
+
+## Manage odoo containers
+
 - Stop containers: `docker compose stop`
 - Restart containers: `docker compose start`
 - Remove containers: `docker compose down`
 
-## Data transfer
+## Attach shell to odoo
+
+- `docker compose exec web odoo shell -d HardSail --db_host db --db_password odbpwd`
+
+## Transfer data
 
 - Export data: `./export-data.sh` -> This script will export volume data from odoo db and web containers into tar files in the *backup/* directory.
 - Import data: `./import-data.sh` -> This script will load the volume data from *backup/odoo-db-data.tar* and *backup/odoo-web-data.tar* to corresping volumes.

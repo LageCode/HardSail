@@ -1,0 +1,90 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="hardsail.list">
+      <field name="name">hardsail list</field>
+      <field name="model">hardsail.hardsail</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="hardsail.action_window">
+      <field name="name">hardsail window</field>
+      <field name="res_model">hardsail.hardsail</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="hardsail.action_server">
+      <field name="name">hardsail server</field>
+      <field name="model_id" ref="model_hardsail_hardsail"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="hardsail" id="hardsail.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="hardsail.menu_1" parent="hardsail.menu_root"/>
+    <menuitem name="Menu 2" id="hardsail.menu_2" parent="hardsail.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="hardsail.menu_1_list" parent="hardsail.menu_1"
+              action="hardsail.action_window"/>
+    <menuitem name="Server to list" id="hardsail" parent="hardsail.menu_2"
+              action="hardsail.action_server"/>
+-->
+
+    <!-- action for hardware products -->
+    <record model="ir.actions.act_window" id="action_hardware_products">
+      <field name="name">Hardware Components</field>
+      <field name="res_model">product.template</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('is_hardware', '=', True)]</field>
+      <field name="context">{'default_is_hardware': True}</field>
+    </record>
+
+    <!-- product template inherited view -->
+    <record id="hardsail_product_template" model="ir.ui.view">
+      <field name="name">product.template.inherited</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_only_form_view"/>
+      <field name="arch" type="xml">
+        <div name="options" position="after">
+          <field name="is_hardware"/>
+          <label for="is_hardware"/>
+        </div>
+      </field>
+    </record>
+
+    <!-- menu items -->
+    <menuitem id="hardsail.menu_root"
+              name="Hardsail"
+              parent=""
+              action="action_hardware_products"
+              sequence="5"/>
+
+  </data>
+</odoo>
