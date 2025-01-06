@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # update-module.sh
-MODULE_NAME=$1
-DATABASE=${2:-HardSail}  # Default to HardSail if no database specified
+MODULE_NAME=${1:-hardsail}  # Default to hardsail if no module specified
+DATABASE=${2:-hardsail}  # Default to hardsail if no database specified
 
 if [ -z "$MODULE_NAME" ]
 then
@@ -11,3 +11,4 @@ then
 fi
 
 docker-compose run --rm web odoo -u "$MODULE_NAME" -d "$DATABASE" --stop-after-init
+docker-compose restart web

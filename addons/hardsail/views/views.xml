@@ -57,14 +57,9 @@
               action="hardsail.action_server"/>
 -->
 
-    <!-- action for hardware products -->
-    <record model="ir.actions.act_window" id="action_hardware_products">
-      <field name="name">Hardware Components</field>
-      <field name="res_model">product.template</field>
-      <field name="view_mode">tree,form</field>
-      <field name="domain">[('is_hardware', '=', True)]</field>
-      <field name="context">{'default_is_hardware': True}</field>
-    </record>
+    <!-- 
+      === VIEWS ===
+    -->
 
     <!-- product template inherited view -->
     <record id="hardsail_product_template" model="ir.ui.view">
@@ -79,12 +74,131 @@
       </field>
     </record>
 
-    <!-- menu items -->
-    <menuitem id="hardsail.menu_root"
+    <!-- component template tree view -->
+    <record id="view_component_template_tree" model="ir.ui.view">
+      <field name="name">component.template.tree</field>
+      <field name="model">component.template</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="property_ids"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- component template form view -->
+    <record id="view_component_template_form" model="ir.ui.view">
+      <field name="name">component.template.form</field>
+      <field name="model">component.template</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="property_ids">
+                <tree editable="bottom">
+                  <field name="name"/>
+                  <field name="type"/>
+                </tree>
+              </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- component property tree view -->
+    <record id="view_component_property_tree" model="ir.ui.view">
+      <field name="name">component.property.tree</field>
+      <field name="model">component.property</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="type"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- component property form view -->
+    <record id="view_component_property_form" model="ir.ui.view">
+      <field name="name">component.property.form</field>
+      <field name="model">component.property</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="type"/>
+              <!-- many to many widget to display components -->
+              <field name="component_ids" widget="many2many_tags"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!--
+      === ACTIONS ===
+    -->
+
+    <!-- action for hardware products -->
+    <record id="action_component_product" model="ir.actions.act_window">
+      <field name="name">Hardware Components</field>
+      <field name="res_model">product.template</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('is_hardware', '=', True)]</field>
+      <field name="context">{'default_is_hardware': True}</field>
+    </record>
+
+    <!-- action for component templates -->
+    <record id="action_component_template" model="ir.actions.act_window">
+      <field name="name">Component Templates</field>
+      <field name="res_model">component.template</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- action for component properties -->
+    <record id="action_component_property" model="ir.actions.act_window">
+      <field name="name">Component Properties</field>
+      <field name="res_model">component.property</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--
+      === MENU ITEMS ===
+    -->
+
+    <!-- hardsail megamenu -->
+    <menuitem id="menu_root"
               name="Hardsail"
-              parent=""
-              action="action_hardware_products"
               sequence="5"/>
 
+    <!-- hardsail component templates root menu -->
+    <menuitem id="menu_component_templates_root"
+              name="Component Templates"
+              parent="menu_root"
+              sequence="1"/>
+
+    <!-- hardsail component products root menu -->
+    <menuitem id="menu_component_products_root"
+              name="Component Products"
+              parent="menu_root"
+              action="action_component_product"
+              sequence="2"/>
+
+    <!-- COMPONENT TEMPLATES SUB-MENUS -->
+    <!-- hardsail menu for component templates -->
+    <menuitem id="menu_component_templates"
+              name="Component Templates"
+              parent="menu_component_templates_root"
+              action="action_component_template"
+              sequence="1"/>
+
+    <!-- hardsail menu for component properties -->
+    <menuitem id="menu_component_properties"
+              name="Component Properties"
+              parent="menu_component_templates_root"
+              action="action_component_property"
+              sequence="2"/>
   </data>
 </odoo>
