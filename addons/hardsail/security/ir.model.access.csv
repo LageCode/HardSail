@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_component_template,access.component.template,model_component_template,base.group_user,1,1,1,1
 access_component_property,access.component.property,model_component_property,base.group_user,1,1,1,1
+access_component_property_option,access.component.property.option,model_component_property_option,base.group_user,1,1,1,1

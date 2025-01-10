@@ -71,6 +71,19 @@
           <field name="is_hardware"/>
           <label for="is_hardware"/>
         </div>
+
+        <notebook position="inside">
+            <page string="Component Specifications" invisible="is_hardware != True">
+                <group>
+                    <field name="component_id" required="is_hardware"/>
+                    <field name="property_ids">
+                        <tree>
+                            <field name="name" readonly="1"/>
+                        </tree>
+                    </field>
+                </group>
+            </page>
+        </notebook>
       </field>
     </record>
 
@@ -129,12 +142,31 @@
             <group>
               <field name="name"/>
               <field name="type"/>
-              <!-- many to many widget to display components -->
-              <field name="component_ids" widget="many2many_tags"/>
+              <field name="option_ids" widget="one2many_tags" invisible="type != 'selection'">
+                <tree editable="bottom">
+                  <field name="name"/>
+                </tree>
+              </field>
             </group>
           </sheet>
         </form>
       </field>
+    </record>
+
+    <!-- property selection option form view -->
+    <record id="view_component_property_option" model="ir.ui.view">
+      <field name="name">component.property.option.form</field>
+      <field name="model">component.property.option</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="property_id" invisible="1"/>
+            </group>
+          </sheet>
+        </form>
+      </field>  
     </record>
 
     <!--
