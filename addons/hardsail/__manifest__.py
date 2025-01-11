@@ -24,9 +24,11 @@ Long description of module's purpose
     'data': [
         'data/product_attributes.xml',
         'data/product_categories.xml',
+        'data/sequences.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'demo/demo.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

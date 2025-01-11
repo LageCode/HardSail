@@ -251,7 +251,79 @@
               </group>
             </xpath>
         </field>
-    </record>    
+    </record>
+
+    <record id="view_mrp_bom_form_inherit" model="ir.ui.view">
+        <field name="name">mrp.bom.form.inherit</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bom_line_ids']/tree" position="inside">
+                <field name="product_id" domain="[('categ_id', 'in', ['CPU', 'Motherboard', 'RAM', 'GPU', 'Storage', 'Power supply'])]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_pc_configuration_form" model="ir.ui.view">
+      <field name="name">pc.configuration.form</field>
+      <field name="model">pc.configuration</field>
+      <field name="arch" type="xml">
+          <form>
+              <header>
+                  <button name="action_validate" 
+                          string="Validate" 
+                          type="object"
+                          invisible="state != 'draft'"
+                          class="oe_highlight"/>
+                          
+                  <button name="action_start_manufacturing" 
+                          string="Start Manufacturing"
+                          type="object" 
+                          invisible="state != 'validated'"
+                          class="oe_highlight"/>
+                          
+                  <button name="action_mark_done" 
+                          string="Mark as Done"
+                          type="object" 
+                          invisible="state != 'manufacturing'"
+                          class="oe_highlight"/>
+                          
+                  <field name="state" widget="statusbar"/>
+              </header>
+              <sheet>
+                  <group>
+                      <field name="name"/>
+                      <field name="bom_id"/>
+                      <field name="total_price"/>
+                  </group>
+              </sheet>
+          </form>
+      </field>
+    </record>
+
+    <record id="view_pc_configuration_tree" model="ir.ui.view">
+        <field name="name">pc.configuration.tree</field>
+        <field name="model">pc.configuration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="total_price"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_pc_configuration" model="ir.actions.act_window">
+        <field name="name">PC Configurations</field>
+        <field name="res_model">pc.configuration</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="menu_pc_configuration"
+              name="PC Configurations"
+              action="action_pc_configuration"
+              parent="menu_root"
+              sequence="10"/>    
 
     <!-- <record id="view_product_template_form_inherit" model="ir.ui.view">
         <field name="name">product.template.form.inherit</field>
