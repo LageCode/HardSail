@@ -12,6 +12,7 @@ class ProductCategory(models.Model):
         help="Attributes applicable for products in this category."
     )
 
+
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
@@ -22,3 +23,4 @@ class ProductTemplate(models.Model):
             self.attribute_line_ids = [
                 (0, 0, {'attribute_id': attr.id}) for attr in self.categ_id.attribute_ids
             ]
+            

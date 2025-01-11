@@ -13,6 +13,7 @@
     <data noupdate="1">
         <record id="product_category_motherboard" model="product.category">
             <field name="name">Motherboard</field>
+            <field name="attribute_ids" eval="[(6, 0, [ref('attr_socket')])]"/>
         </record>
     </data>
     <data noupdate="1">
