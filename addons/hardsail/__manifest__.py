@@ -22,6 +22,8 @@ Long description of module's purpose
 
     # always loaded
     'data': [
+        'data/product_attributes.xml',
+        'data/product_categories.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',

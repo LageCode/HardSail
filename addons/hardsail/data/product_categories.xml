@@ -1,0 +1,34 @@
+<odoo>
+    <data noupdate="1">
+        <record id="product_category_cpu" model="product.category">
+            <field name="name">CPU</field>
+            <field name="attribute_ids" eval="[(6, 0, [ref('attr_socket')])]"/>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="product_category_gpu" model="product.category">
+            <field name="name">GPU</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="product_category_motherboard" model="product.category">
+            <field name="name">Motherboard</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="product_category_ram" model="product.category">
+            <field name="name">RAM</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="product_category_ps" model="product.category">
+            <field name="name">Power supply</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="product_category_storage" model="product.category">
+            <field name="name">Storage</field>
+        </record>
+    </data>
+
+</odoo>
