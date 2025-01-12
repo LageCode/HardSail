@@ -1,48 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
+        <record id="vendor_hardware_supplier" model="res.partner">
+            <field name="name">Hardware Supplier</field>
+            <field name="is_company">True</field>
+        </record>
+
+        <record id="customer_config_customer" model="res.partner">
+            <field name="name">Configuration Customer</field>
+            <field name="is_company">False</field>
+        </record>
+
         <!-- Demo records for PC Components -->
+        <record id="product_ryzen_7800x3d" model="product.template">
+            <field name="name">AMD Ryzen 7 7800X3D</field>
+            <field name="list_price">449.0</field>
+            <field name="standard_price">380.0</field>
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_cpu"/>
+            <field name="attribute_line_ids" eval="[(0, 0, {
+                'attribute_id': ref('attr_socket'),
+                'value_ids': [(6, 0, [ref('attr_value_am5')])]
+            })]"/>
+            <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 380})]"/>
+        </record>
+
+        <record id="product_msi_x670e" model="product.template">
+            <field name="name">MSI MPG X670E EDGE WIFI</field>
+            <field name="list_price">389.0</field>
+            <field name="standard_price">320.0</field>
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_motherboard"/>
+            <field name="attribute_line_ids" eval="[(0, 0, {
+                'attribute_id': ref('attr_socket'),
+                'value_ids': [(6, 0, [ref('attr_value_am5')])]
+            }), (0, 0, {
+                'attribute_id': ref('attr_ddr'),
+                'value_ids': [(6, 0, [ref('attr_value_ddr5')])]
+            })]"/>
+            <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 320})]"/>
+        </record>
+
+        <record id="product_ddr5_corsair" model="product.template">
+            <field name="name">Corsair Vengeance 32GB (2x16GB) DDR5 6000MHz</field>
+            <field name="list_price">159.0</field>
+            <field name="standard_price">130.0</field>
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_ram"/>
+            <field name="attribute_line_ids" eval="[(0, 0, {
+                'attribute_id': ref('attr_ddr'),
+                'value_ids': [(6, 0, [ref('attr_value_ddr5')])]
+            })]"/>
+            <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 130})]"/>
+        </record>
+
+        <record id="product_samsung_990_pro" model="product.template">
+            <field name="name">Samsung 990 PRO 1TB PCIe 4.0</field>
+            <field name="list_price">159.0</field>
+            <field name="standard_price">130.0</field>
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_storage"/>
+            <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 130})]"/>
+        </record>
+
         <record id="product_asus_tuf_gaming" model="product.template">
             <field name="name">ASUS TUF GAMING B760-PLUS WIFI</field>
-            <field name="categ_id" ref="product_category_motherboard"/>
             <field name="list_price">240.0</field>
             <field name="standard_price">200.0</field>
+            <!-- <field name="available_in_pos">True</field> -->
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_motherboard"/>
             <field name="attribute_line_ids" eval="[(0, 0, {
-                    'attribute_id': ref('attr_socket'),
-                    'value_ids': [(6, 0, [ref('attr_value_lga17')])]
-                })]"/>
+                'attribute_id': ref('attr_socket'),
+                'value_ids': [(6, 0, [ref('attr_value_lga17')])]
+            }), (0, 0, {
+                'attribute_id': ref('attr_ddr'),
+                'value_ids': [(6, 0, [ref('attr_value_ddr4')])]
+            })]"/>
+            <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 200})]"/>
         </record>
 
         <record id="product_intel_core_i7" model="product.template">
             <field name="name">Intel Core i7-14700KF (3.4 GHz)</field>
-            <field name="categ_id" ref="product_category_cpu"/>
             <field name="list_price">480.0</field>
             <field name="standard_price">400.0</field>
+            <!-- <field name="available_in_pos">True</field> -->
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_cpu"/>
             <field name="attribute_line_ids" eval="[(0, 0, {
-                    'attribute_id': ref('attr_socket'),
-                    'value_ids': [(6, 0, [ref('attr_value_lga17')])]
-                })]"/>
+                'attribute_id': ref('attr_socket'),
+                'value_ids': [(6, 0, [ref('attr_value_lga17')])]
+            })]"/>
+            <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 400})]"/>
         </record>
 
         <record id="product_radeon_rx7600" model="product.template">
             <field name="name">Sapphire Radeon RX 7600 XT PULSE GAMING</field>
-            <field name="categ_id" ref="product_category_gpu"/>
             <field name="list_price">420.0</field>
             <field name="standard_price">350.0</field>
+            <!-- <field name="available_in_pos">True</field> -->
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_gpu"/>
+            <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 350})]"/>
         </record>
 
         <record id="product_ddr4_kingston" model="product.template">
             <field name="name">DDR4 Kingston Fury Beast - 8 Go 3200 MHz - CAS 16</field>
-            <field name="categ_id" ref="product_category_ram"/>
             <field name="list_price">60.0</field>
             <field name="standard_price">50.0</field>
+            <!-- <field name="available_in_pos">True</field> -->
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_ram"/>
+            <field name="attribute_line_ids" eval="[(0, 0, {
+                    'attribute_id': ref('attr_ddr'),
+                    'value_ids': [(6, 0, [ref('attr_value_ddr4')])]
+                })]"/>
+                <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 50})]"/>
         </record>
 
         <record id="product_samsung_980" model="product.template">
             <field name="name">Samsung 980 250 Go</field>
-            <field name="categ_id" ref="product_category_storage"/>
             <field name="list_price">72.0</field>
             <field name="standard_price">60.0</field>
+            <!-- <field name="available_in_pos">True</field> -->
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_storage"/>
+            <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 60})]"/>
+        </record>
+
+        <record id="product_msi_mag_a650bn" model="product.template">
+            <field name="name">MSI MAG A650BN</field>
+            <field name="list_price">75.0</field>
+            <field name="standard_price">60.0</field>
+            <!-- <field name="available_in_pos">True</field> -->
+            <field name="detailed_type">product</field>
+            <field name="categ_id" ref="product_category_ps"/>
+            <field name="seller_ids" eval="[(0, 0, {
+                'partner_id': ref('vendor_hardware_supplier'), 'min_qty': 1, 'price': 60})]"/>
         </record>
     </data>
 </odoo>

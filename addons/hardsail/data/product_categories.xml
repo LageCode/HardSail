@@ -13,12 +13,13 @@
     <data noupdate="1">
         <record id="product_category_motherboard" model="product.category">
             <field name="name">Motherboard</field>
-            <field name="attribute_ids" eval="[(6, 0, [ref('attr_socket')])]"/>
+            <field name="attribute_ids" eval="[(6, 0, [ref('attr_socket'), ref('attr_ddr')])]"/>
         </record>
     </data>
     <data noupdate="1">
         <record id="product_category_ram" model="product.category">
             <field name="name">RAM</field>
+            <field name="attribute_ids" eval="[(6, 0, [ref('attr_ddr')])]"/>
         </record>
     </data>
     <data noupdate="1">
