@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Demo records for PC Components -->
-    <record id="product_asus_tuf_gaming" model="product.template">
-        <field name="name">ASUS TUF GAMING B760-PLUS WIFI</field>
-        <field name="categ_id" ref="product_category_motherboard"/>
-        <field name="list_price">240.0</field>
-        <field name="standard_price">200.0</field>
-        <field name="attribute_line_ids" eval="[(0, 0, {'attribute_id': ref('attr_socket'), 'value_ids': [(6, 0, [ref('attr_value_lga17')])]})]"/>
-    </record>
+    <data noupdate="1">
+        <!-- Demo records for PC Components -->
+        <record id="product_asus_tuf_gaming" model="product.template">
+            <field name="name">ASUS TUF GAMING B760-PLUS WIFI</field>
+            <field name="categ_id" ref="product_category_motherboard"/>
+            <field name="list_price">240.0</field>
+            <field name="standard_price">200.0</field>
+            <field name="attribute_line_ids" eval="[(0, 0, {
+                    'attribute_id': ref('attr_socket'),
+                    'value_ids': [(6, 0, [ref('attr_value_lga17')])]
+                })]"/>
+        </record>
 
-    <record id="product_intel_core_i7" model="product.template">
-        <field name="name">Intel Core i7-14700KF (3.4 GHz)</field>
-        <field name="categ_id" ref="product_category_cpu"/>
-        <field name="list_price">480.0</field>
-        <field name="standard_price">400.0</field>
-        <field name="attribute_line_ids" eval="[(0, 0, {'attribute_id': ref('attr_socket'), 'value_ids': [(6, 0, [ref('attr_value_lga17')])]})]"/>
-    </record>
+        <record id="product_intel_core_i7" model="product.template">
+            <field name="name">Intel Core i7-14700KF (3.4 GHz)</field>
+            <field name="categ_id" ref="product_category_cpu"/>
+            <field name="list_price">480.0</field>
+            <field name="standard_price">400.0</field>
+            <field name="attribute_line_ids" eval="[(0, 0, {
+                    'attribute_id': ref('attr_socket'),
+                    'value_ids': [(6, 0, [ref('attr_value_lga17')])]
+                })]"/>
+        </record>
 
-    <record id="product_radeon_rx7600" model="product.template">
-        <field name="name">Sapphire Radeon RX 7600 XT PULSE GAMING</field>
-        <field name="categ_id" ref="product_category_gpu"/>
-        <field name="list_price">420.0</field>
-        <field name="standard_price">350.0</field>
-    </record>
+        <record id="product_radeon_rx7600" model="product.template">
+            <field name="name">Sapphire Radeon RX 7600 XT PULSE GAMING</field>
+            <field name="categ_id" ref="product_category_gpu"/>
+            <field name="list_price">420.0</field>
+            <field name="standard_price">350.0</field>
+        </record>
 
-    <record id="product_ddr4_kingston" model="product.template">
-        <field name="name">DDR4 Kingston Fury Beast - 8 Go 3200 MHz - CAS 16</field>
-        <field name="categ_id" ref="product_category_ram"/>
-        <field name="list_price">60.0</field>
-        <field name="standard_price">50.0</field>
-    </record>
+        <record id="product_ddr4_kingston" model="product.template">
+            <field name="name">DDR4 Kingston Fury Beast - 8 Go 3200 MHz - CAS 16</field>
+            <field name="categ_id" ref="product_category_ram"/>
+            <field name="list_price">60.0</field>
+            <field name="standard_price">50.0</field>
+        </record>
 
-    <record id="product_samsung_980" model="product.template">
-        <field name="name">Samsung 980 250 Go</field>
-        <field name="categ_id" ref="product_category_storage"/>
-        <field name="list_price">72.0</field>
-        <field name="standard_price">60.0</field>
-    </record>
+        <record id="product_samsung_980" model="product.template">
+            <field name="name">Samsung 980 250 Go</field>
+            <field name="categ_id" ref="product_category_storage"/>
+            <field name="list_price">72.0</field>
+            <field name="standard_price">60.0</field>
+        </record>
+    </data>
 </odoo>
